@@ -1,0 +1,1 @@
+{"buildings":[{"id":0,"name":"Cadman Building","slug":"cadman"}],"rooms":[{"id":0,"name":"C108","code":"c108","buildingId":0,"roomType":0},{"id":1,"name":"C117","code":"c117","buildingId":0,"roomType":0}],"roomTypes":[{"id":0,"name":"Computing Lab","description":"A general purpose computing lab"}]}
