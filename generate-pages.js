@@ -1,9 +1,10 @@
 const { drizzle } = require('drizzle-orm/libsql');
-const { pageDecks, pages, buildings, infoPoints, rooms, roomTypes } = require("./drizzle/schema.js");
+const { pageDecks, pages, buildings, infoPoints, rooms, roomTypes } = require("./drizzle/schema.ts");
 const { eq } = require('drizzle-orm');
 const db = drizzle("file:./local.db");
 
 const fs = require("fs");
+const path = require("node:path");
 
 async function getDeckPages(deck)
 {
@@ -66,17 +67,23 @@ async function main()
 
     fs.rmSync(basePathOutTmp, { recursive: true, force: true });
     fs.mkdirSync(basePathOutTmp);
+    fs.mkdirSync(path.resolve(basePathOutTmp, "page-decks/"));
 
 
     for(let infoPoint of allInfoPoints)
     {
-        const fileOutput = `${basePathOutTmp}${infoPoint.slug}.json`;
+        const fileOutput = path.resolve(basePathOutTmp, "page-decks/", infoPoint.slug + ".json");
         const infoPointData = JSON.stringify(infoPoint);
 
         fs.writeFileSync(fileOutput, infoPointData);
     }
 
-    fs.writeFileSync(`${basePathOutTmp}buildingRoomInfo.json`, JSON.stringify(buildingRoomInfo));
+    const infoPointsObj = allInfoPoints.map(x => {
+        return { ...x, pageDecksFile: "./page-decks/" + `${x.slug}.json` }
+    });
+
+    fs.writeFileSync(path.resolve(basePathOutTmp, "infoPoints.json"), JSON.stringify(infoPointsObj));
+    fs.writeFileSync(path.resolve(basePathOutTmp, "buildingRoomInfo.json"), JSON.stringify(buildingRoomInfo));
 }
 
 main();
