@@ -1,5 +1,5 @@
 const { drizzle } = require('drizzle-orm/libsql');
-const { pageDecks, pages, buildings, infoPoints, rooms, roomTypes } = require("./drizzle/schema.ts");
+const { pageDecks, pages, buildings, infoPoints, rooms, roomTypes } = require("./drizzle/schema.js");
 const { eq } = require('drizzle-orm');
 const db = drizzle("file:./local.db");
 
@@ -76,7 +76,7 @@ async function main()
         fs.writeFileSync(fileOutput, infoPointData);
     }
 
-    fs.writeFileSync(`${basePathOutTmp}buidlingRoomInfo.json`, JSON.stringify(buildingRoomInfo));
+    fs.writeFileSync(`${basePathOutTmp}buildingRoomInfo.json`, JSON.stringify(buildingRoomInfo));
 }
 
 main();
