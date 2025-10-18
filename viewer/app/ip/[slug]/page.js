@@ -1,15 +1,22 @@
 "use client"
 
 import React from "react"
-import { ArrowLeft, ArrowRight } from "lucide-react"
+import { useState } from "react";
+import { ArrowLeft, ArrowRight, Pointer } from "lucide-react"
 import { useSearchParams } from 'next/navigation'
 import "./page.sass"
+import { InfoPointSteps } from "./infopointsteps"
+import { Tracker } from "./tracker";
 
 export default function Page ({params})
 {
     const { slug } = React.use(params);
 
-    console.log(slug);
+    const [ curPageIdx, setCurPageIdx ] = useState(0);
+
+    let data = "Straight ahead of your current location will be a large set of stairs.\n- Climb the stairs until you reach `the landing` with checkered tiles.\n- Walk up the small set of stairs to your right and turn left towards the `double doors`.\n- Scan the `Salto Lock` on the **right hand side** to unlock them.\n\n*Please swipe right to the next step.*";
+    // data = "Go up the stairs and turn right. `C117` will be on your right."
+    let title = "Up the main staircase"
 
     return <main className="info-point-page">
         <nav>
@@ -17,24 +24,20 @@ export default function Page ({params})
             <ArrowLeft className="icon" />
         </nav>
         <article>
-            <div className="tracker">
-                <span>1/5</span>
+            <div className="jumbo">
+
             </div>
 
             <div className="step-content">
-                <div className="filler"></div>
+                <h1>{title}</h1>
 
-                <h1>Go to the doors and do this something else</h1>
-
-                <div className="step-desc">
-                    <ol>
-                        <li><span>At the top of the stairs, you should see two double doors.</span></li>
-                        <li><span>Scan the <kbd>Salto Lock</kbd> on the <b>right hand-side</b> to unlock them.</span></li>
-                        <li><span>Proceed through the doors.</span></li>
-                        <li><span>Proceed through the doors.</span></li>
-                    </ol>
-                </div>
+                <InfoPointSteps markdown={data}/>
             </div>
         </article>
+        <footer>
+            <button><ArrowLeft className="nav-button-bottom"/></button>
+            <Tracker index={curPageIdx + 2} total={5} />
+            <button><ArrowRight className="nav-button-bottom"/></button>
+        </footer>
     </main>
 }

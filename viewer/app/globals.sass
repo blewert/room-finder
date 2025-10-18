@@ -1,19 +1,68 @@
-$color-light: #ededed
-$color-dark: #0a0a0a
+$color-light: #fff
+$color-dark: #000
 
 :root
-    color-scheme: light dark
-    --background: light-dark($color-light, $color-dark)
-    --foreground: light-dark($color-dark, $color-light)
+    // color-scheme: light dark
+    // --background: light-dark($color-light, $color-dark)
+    // --foreground: light-dark($color-dark, $color-light)
 
+    --background: #{$color-light}
+    --foreground: #{$color-dark}
+
+    --background-800: #{rgba($color-light, 0.800)}
+    --background-700: #{rgba($color-light, 0.700)}
+    --background-600: #{rgba($color-light, 0.600)}
+    --background-500: #{rgba($color-light, 0.500)}
+    --background-400: #{rgba($color-light, 0.400)}
+    --background-300: #{rgba($color-light, 0.300)}
+    --background-200: #{rgba($color-light, 0.200)}
+
+    --foreground-800: #{rgba($color-dark, 0.800)}
+    --foreground-700: #{rgba($color-dark, 0.700)}
+    --foreground-600: #{rgba($color-dark, 0.600)}
+    --foreground-500: #{rgba($color-dark, 0.500)} 
+    --foreground-400: #{rgba($color-dark, 0.400)}
+    --foreground-300: #{rgba($color-dark, 0.300)}
+    --foreground-200: #{rgba($color-dark, 0.200)}
+
+    --accent-1: #{#dad6e4}
+    --accent-2: #{#b4c6f1}
+
+    --accent-selected: #0077ff
+
+    
 @media (prefers-color-scheme: dark)
     :root
-        --background: #000
-        --foreground: #fff
+        --background: #{$color-dark}
+        --foreground: #{$color-light}
+
+        --background-800: #{rgba($color-dark, 0.800)}
+        --background-700: #{rgba($color-dark, 0.700)}
+        --background-600: #{rgba($color-dark, 0.600)}
+        --background-500: #{rgba($color-dark, 0.500)}
+        --background-400: #{rgba($color-dark, 0.400)}
+        --background-300: #{rgba($color-dark, 0.300)}
+        --background-200: #{rgba($color-dark, 0.200)}
+
+        --foreground-800: #{rgba($color-light, 0.800)}
+        --foreground-700: #{rgba($color-light, 0.700)}
+        --foreground-600: #{rgba($color-light, 0.600)}
+        --foreground-500: #{rgba($color-light, 0.500)}
+        --foreground-400: #{rgba($color-light, 0.400)}
+        --foreground-300: #{rgba($color-light, 0.300)}
+        --foreground-200: #{rgba($color-light, 0.200)}
+
+        --accent-1: #29272e
+        --accent-2: #3b3746
+
+        --accent-selected: #f0ba45
+
+
 
 
 body
     background: var(--background)
+    color: var(--foreground)
     margin: 0
     padding: 0
 

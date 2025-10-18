@@ -1,4 +1,4 @@
-$info-point-page-pad: 0.75em
+$info-point-page-pad: 0.85em
 
 .info-point-page
     // background: red
@@ -13,59 +13,83 @@ $info-point-page-pad: 0.75em
         justify-content: space-between
         padding: $info-point-page-pad
         font-size: 1.5em
-        border-bottom: 1px solid var(--foreground)
+        // border-bottom: 1px solid var(--foreground)
 
         .icon
             width: 1.5em
             height: 1.5em
 
     article
-        padding: $info-point-page-pad
         flex: 1
         font-size: 1.125em
         display: flex
         flex-direction: column
 
+        .jumbo
+            background: #222
+            flex: 1
+            max-height: 20vh
         
-        .tracker
-            text-align: right
-
-        .tracker span
-            border: 1px solid var(--foreground)
-            display: inline-block
-            padding: 0.25em 0.5em
-            font-weight: 500
-            font-family: "Geist Mono", monospace
 
         .step-content
-            flex: 1
             display: flex
             flex-direction: column
-            justify-content: center
+            flex: 1
             font-weight: 350
+            padding: 0 $info-point-page-pad
+            padding-top: $info-point-page-pad * 2
 
-            ol
+            p
+                padding-bottom: 1em
+                padding-top: 0.5em
+
+            em
+                font-style: normal
+                display: block
+                margin-top: 0.5em
+                border: 2px solid var(--foreground-200)
+                // background: var(--foreground-200)
+                letter-spacing: -0.00em
+                font-weight: 500
+                text-align: center
+                padding: 0.75em 0
+                border-radius: 0.75em
+
+            code
+                font-style: normal
+                white-space: nowrap
+                font-family: inherit
+                border: 1px solid var(--foreground-400)
+                padding: 0.125em 0.35em
+                // font-size: smaller
+                font-weight: 600
+                border-radius: 5px
+
+            ul
                 list-style-type: decimal-leading-zero
                 list-style-position: inside
                 margin: 0
                 padding: 0
+                padding-top: 0.5em
                 max-height: 35vh
                 overflow: scroll
+                line-height: 150%
 
 
                 li
-                    border-left: 5px solid var(--foreground)
+                    // border-left: 5px solid var(--foreground)
                     padding: 0.5em
-                    padding-left: 1em
+                    padding-left: 0.75em
                     font-family: "Inter"
-                    line-height: 150%
+                    font-size: smaller
+                    border-radius: 0.5em
 
                     &:nth-child(even)
-                        background: #3b3746
+                        background: var(--accent-1)
                         
                     
-                    // background: linear-gradient(33deg, #812575 0%, #b8882f 100%)
-                    background: #29272e
+                    background: linear-gradient(33deg, #812575 0%, #b8882f 100%)
+                    background: var(--accent-2)
 
                     &:not(:last-child)
                         margin-bottom: 1em
@@ -75,22 +99,69 @@ $info-point-page-pad: 0.75em
                         font-size: 1em
                         letter-spacing: 0.125em
 
-                    span
-                        display: block
-
-            kbd
-                font-style: normal
-                font-family: inherit
-                border: 1px solid var(--foreground)
-                padding: 0.125em 0.25em
-                font-size: smaller
-                font-weight: 700
-                border-radius: 2px
 
             h1
                 font-size: 1.75em
                 font-weight: 700
                 letter-spacing: -0.05em
                 // border: 1px solid
-                padding-bottom: 1em
+                padding-bottom: 0.5em
 
+
+footer
+    padding: $info-point-page-pad
+    display: flex
+    align-items: center
+    border-top: 1px solid var(--foreground-200)
+    justify-content: space-between
+
+    button
+        color: var(--foreground)
+        border: 2px solid var(--foreground-500)
+        // color: var(--foreground)
+        background: transparent
+        padding: 0.45em
+        display: flex
+        border-radius: 1em
+        font-size: 2em
+
+        .nav-button-bottom
+            width: 1em
+            height: 1em
+
+
+
+
+
+.tracker
+    // border: 1px solid var(--foreground)
+    width: 25%
+    display: flex
+    flex-direction: column
+    justify-content: center
+    font-family: "Geist Mono", monospace
+    text-align: center
+
+    span
+        padding-bottom: 0.25em
+        font-weight: 400
+        font-size: smaller
+
+    .progress-bar
+        height: 8px
+        background: var(--foreground-300)
+        position: relative
+        overflow: hidden
+        border-radius: 5
+        margin-top: 5px
+
+        .inner
+            content: " "
+            background: var(--accent-selected)
+            position: absolute
+            width: inherit
+            transition: 0.5s
+            top: 0
+            left: 0
+            height: 100%
+            z-index: 10
