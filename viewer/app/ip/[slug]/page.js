@@ -8,7 +8,7 @@ import "./page.sass"
 import { InfoPointSteps } from "./infopointsteps"
 import { Tracker } from "./tracker";
 
-import { Virtual, EffectCreative } from "swiper/modules";
+import { Virtual } from "swiper/modules";
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import 'swiper/css';
 // import 'swiper/css/navigation';
@@ -99,12 +99,25 @@ export default function Page ({params})
         else return <button className="null"><ArrowRight className="nav-button-bottom" /></button>
     }
 
+    const oneSlidePerSwipeFix = {
+        // onRealIndexChange: (swiper) => {
+        //     swiper.allowTouchMove = false;
+        //     swiper.unsetGrabCursor();
+        // },
+        // onTouchEnd: (swiper) => {
+        //     swiper.allowTouchMove = true;
+        //     swiper.unsetGrabCursor();
+        // }
+        resistanceRatio: 0.65,
+        touchRatio: 0.4
+    };
+
     return <main className="info-point-page">
             <nav>
                 {/* <span>Turn right</span> */}
                 <ArrowLeft className="icon" />
             </nav>
-            <Swiper onTransitionEnd={onSlideChange} modules={[Virtual]} spaceBetween={70} onSwiper={setSwiper} virtual>
+        <Swiper {...oneSlidePerSwipeFix} preventClicks preventInteractionOnTransition onTransitionEnd={onSlideChange} modules={[Virtual]} spaceBetween={20} onSwiper={setSwiper} virtual>
                     {slides.map((e, i) => {
                         return <SwiperSlide key={e + i} virtualIndex={i}>
                             {e}
