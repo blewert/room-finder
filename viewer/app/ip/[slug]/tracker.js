@@ -2,12 +2,14 @@
 export function Tracker(props)
 {
     let idx = props.index;
-    let total = props.total;
-
-    if(!props?.zeroBased)
-        idx += 1;
+    let total = props.total-1;
 
     const widthPercent = (Math.max(idx, 1) / total) * 100 + "%";
+
+    if(idx == 0)
+    {
+        return null;
+    }
 
     return <div className="tracker">
             <span>Step {idx} of {total}</span>

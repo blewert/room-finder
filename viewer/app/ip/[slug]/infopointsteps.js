@@ -10,7 +10,7 @@ export function InfoPointSteps(props)
     useEffect(() => {
         const htmlContent = remark().use(html).process(md).then(function (res)
         {
-            console.log(res);
+            // console.log(res);
             setMdHtml(res.toString());
         });
     });
@@ -18,7 +18,7 @@ export function InfoPointSteps(props)
     if (mdHtml == null)
         return null;
 
-    console.log(mdHtml);
+    // console.log(mdHtml);
 
     return <div className="step-desc" dangerouslySetInnerHTML={{ __html: mdHtml }}>
     </div>
