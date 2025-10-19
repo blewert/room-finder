@@ -134,6 +134,12 @@ $info-point-page-pad: 0.85em
             em
                 margin-top: 1.5em
 
+            h2
+                color: var(--foreground-400)
+                font-weight: 400
+                font-size: 1.25em
+                padding-bottom: 1em
+
 
 footer
     padding: $info-point-page-pad
@@ -151,10 +157,20 @@ footer
         display: flex
         border-radius: 1em
         font-size: 2em
+        
+        &:active
+            border-color: var(--accent-selected)
+            background: var(--foreground-200)
+            color: var(--accent-selected)
+            transition: 0.1s
+            borde
 
         .nav-button-bottom
             width: 1em
             height: 1em
+
+        &.null
+            visibility: hidden
 
 
 
@@ -184,10 +200,10 @@ footer
 
         .inner
             content: " "
-            background: var(--accent-selected)
+            background: linear-gradient(-90deg, var(--foreground) 0%, var(--accent-selected) 100%)
             position: absolute
             width: inherit
-            transition: 0.5s
+            transition: 0.25s
             top: 0
             left: 0
             height: 100%

@@ -8,20 +8,21 @@ import "./page.sass"
 import { InfoPointSteps } from "./infopointsteps"
 import { Tracker } from "./tracker";
 
-import { Virtual } from "swiper/modules";
+import { Virtual, EffectCreative } from "swiper/modules";
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import 'swiper/css';
 // import 'swiper/css/navigation';
 // import 'swiper/css/pagination';
 // import 'swiper/css/scrollbar';
 
-function getFirstPage()
+function getFirstPage(startPoint, room)
 {
     let md = "You can get started by **swiping right**, or using the buttons at the bottom of this page.\n*Swipe right to begin*\n"
 
     return <article className="centered">
         <div className="step-content">
-            <h1>Getting started</h1>
+            <h1>Directions to {room}</h1>
+            <h2>Starting from {startPoint}</h2>
             <InfoPointSteps markdown={md}/>
         </div>
     </article>
@@ -53,7 +54,7 @@ export default function Page ({params})
         }
     );
 
-    slides = [getFirstPage(), ...slides];
+    slides = [getFirstPage("Cadman Foyer", "Flaxman Film Theatre"), ...slides];
 
     const [swiper, setSwiper] = useState(null);
 
@@ -70,20 +71,32 @@ export default function Page ({params})
         if(!swiper)
             return;
 
-        swiper.slideNext();
+        if(dir > 0)
+            swiper.slideNext();
+        else
+            swiper.slidePrev();
     }
-
-    let updateLoop = null;
 
     function onSlideChange(data)
     {
         if(!swiper)
             return;
 
-        if(updateLoop)
-            return;
-
         setCurPageIdx(data.activeIndex);
+    }
+
+    function getButton(kind)
+    {
+        if(!swiper)
+            return null;
+
+        if(curPageIdx != 0 && kind=="left")
+            return <button onClick={() => swipeSlide(-1)}><ArrowLeft className="nav-button-bottom" /></button>;
+
+        else if(curPageIdx != (slides.length-1) && kind=="right")
+            return <button onClick={() => swipeSlide(1)}><ArrowRight className="nav-button-bottom" /></button>;
+
+        else return <button className="null"><ArrowRight className="nav-button-bottom" /></button>
     }
 
     return <main className="info-point-page">
@@ -91,7 +104,7 @@ export default function Page ({params})
                 {/* <span>Turn right</span> */}
                 <ArrowLeft className="icon" />
             </nav>
-            <Swiper onTransitionEnd={onSlideChange} modules={[Virtual]} spaceBetween={20} onSwiper={setSwiper} virtual>
+            <Swiper onTransitionEnd={onSlideChange} modules={[Virtual]} spaceBetween={70} onSwiper={setSwiper} virtual>
                     {slides.map((e, i) => {
                         return <SwiperSlide key={e + i} virtualIndex={i}>
                             {e}
@@ -99,9 +112,9 @@ export default function Page ({params})
                     })}
             </Swiper>
             <footer>
-                <button onClick={swipeSlide.bind(1)}><ArrowLeft className="nav-button-bottom"/></button>
+                {getButton("left")}
                 {getTracker()}
-                <button onClick={swipeSlide.bind(-1)}><ArrowRight className="nav-button-bottom"/></button>
+                {getButton("right")}
             </footer>
         </main>
 }
